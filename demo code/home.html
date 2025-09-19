@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+</head>
+<body style="margin:0; font-family: Arial, Helvetica, sans-serif; background:#0b1220; color:#e5e7eb;">
+  <div style="min-height:100vh; display:flex; flex-direction:column;">
+    <header style="display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background:#0f172a; border-bottom:1px solid #1f2937;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:10px; height:10px; border-radius:50%; background:#22c55e;"></div>
+        <strong style="font-size:14px; color:#e5e7eb;">Dead Stock Register</strong>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span id="userEmail" style="font-size:12px; color:#9ca3af;">Signed in</span>
+        <button id="logoutBtn" style="padding:8px 10px; border:none; border-radius:8px; background:#ef4444; color:#fff; font-size:12px; cursor:pointer;">Logout</button>
+      </div>
+    </header>
+
+    <main style="flex:1; display:flex; align-items:center; justify-content:center; padding:24px;">
+      <div style="width:100%; max-width:720px; background:#0f172a; border:1px solid #1f2937; border-radius:12px; padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.25);">
+        <h1 style="margin:0 0 10px; font-size:20px; color:#f3f4f6;">Home</h1>
+        <p style="margin:0 0 16px; color:#9ca3af; font-size:13px;">You are signed in. This is a simple dark-mode home page.</p>
+
+        <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px;">
+          <div style="background:#0b1220; border:1px solid #1f2937; border-radius:10px; padding:16px;">
+            <h2 style="margin:0 0 6px; font-size:14px; color:#e5e7eb;">Quick Action</h2>
+            <button style="padding:8px 10px; border:1px solid #374151; border-radius:8px; background:#111827; color:#e5e7eb; font-size:12px; cursor:pointer;">Add Item</button>
+          </div>
+          <div style="background:#0b1220; border:1px solid #1f2937; border-radius:10px; padding:16px;">
+            <h2 style="margin:0 0 6px; font-size:14px; color:#e5e7eb;">Stats</h2>
+            <p style="margin:0; font-size:12px; color:#9ca3af;">0 items • 0 categories</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer style="padding:14px 18px; text-align:center; border-top:1px solid #1f2937; background:#0f172a; color:#6b7280; font-size:12px;">
+      © <span id="year"></span> Dead Stock Register
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var token = null;
+      var email = null;
+      try {
+        token = sessionStorage.getItem('dsr_auth_token');
+        email = localStorage.getItem('dsr_saved_email');
+      } catch (e) {}
+
+      if (!token) {
+        window.location.replace('loginpage.html');
+        return;
+      }
+
+      var emailSpan = document.getElementById('userEmail');
+      if (emailSpan) {
+        emailSpan.textContent = email ? ('Signed in as ' + email) : 'Signed in';
+      }
+
+      var logoutBtn = document.getElementById('logoutBtn');
+      logoutBtn.addEventListener('click', function () {
+        try {
+          sessionStorage.removeItem('dsr_auth_token');
+        } catch (e) {}
+        window.location.replace('loginpage.html');
+      });
+
+      var year = document.getElementById('year');
+      if (year) {
+        year.textContent = String(new Date().getFullYear());
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
