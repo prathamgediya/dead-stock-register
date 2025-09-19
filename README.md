@@ -1,5 +1,3 @@
-﻿# Dead Stock Register Project
-
 # Online Dead Stock Register (ODSR)
 
 A modern, secure, and efficient web application designed to replace traditional handwritten dead stock registers. This system automates inventory record-keeping by extracting data directly from uploaded bill documents, providing real-time access to authorized users across an organization.
@@ -76,3 +74,4 @@ git clone https://github.com/your-username/online-dead-stock-register.git
 cd online-dead-stock-register
 npm install
 npm run dev
+
